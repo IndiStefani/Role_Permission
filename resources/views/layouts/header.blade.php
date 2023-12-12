@@ -8,9 +8,11 @@
                 <a href="#" class="user-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
                     <div class="label">
                         <span></span>
-                        <div>Admin</div>
+                        <div>{{ auth()->user()->name }}</div>
                     </div>
-                    <img class="img-user" src="{{ asset('') }}assets/images/avatar1.png" alt="user" srcset="">
+                    @if (auth()->user()->avatar)
+                    <img class="img-user" src="{{ asset('assets/images/avatar/' . auth()->user()->avatar) }}" alt="user" srcset="">
+                    @endif
                 </a>
                 <ul class="dropdown-menu small">
                     <li class="menu-content ps-menu">
@@ -24,7 +26,8 @@
                                 <i class="ti-settings"></i> Setting
                             </div>
                         </a>
-                        <a href="#">
+
+                        <a href="{{ route('logout') }}">
                             <div class="description">
                                 <i class="ti-power-off"></i> Logout
                             </div>
@@ -32,7 +35,6 @@
                     </li>
                 </ul>
             </div>
-
         </div>
     </div>
 </header>
