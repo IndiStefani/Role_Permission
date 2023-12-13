@@ -40,6 +40,8 @@
     </div>
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.js') }}"></script>
     <script src="{{ asset('vendor/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
 
 
     <!-- js for this page only -->
@@ -48,6 +50,7 @@
     <script src="{{ asset('assets/js/main.min.js') }}"></script>
 
     <script>
+        // table
         $(document).ready(function() {
             $('#table-id').DataTable({
                 paging: true,
@@ -57,6 +60,17 @@
             });
         });
 
+        // date picker
+        $('.date').datepicker({
+            autoclose: true,
+            todayHighlight: true,
+            format: 'yyyy/mm/dd'
+        }).on('changeDate', function(e) {
+            console.log(e.target.value);
+        });
+
+
+        // sidebar
         document.addEventListener('DOMContentLoaded', function() {
             var links = document.querySelectorAll('.link');
 

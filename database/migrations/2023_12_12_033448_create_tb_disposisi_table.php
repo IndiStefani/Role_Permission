@@ -14,10 +14,8 @@ return new class extends Migration
         Schema::create('tb_disposisi', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_surat_masuk')->nullable();
-            $table->unsignedBigInteger('id_pegawai')->nullable();
-            $table->string('catatan')->nullable();
-            $table->string('baca')->nullable();
-            $table->string('proses')->nullable();
+            $table->unsignedBigInteger('id_jabatan')->nullable();
+            $table->string('isi_disposisi')->nullable();
             $table->timestamps();
         });
     }

@@ -3,8 +3,8 @@
 
 <div class="main-content">
     <div class="card-body d-flex justify-content-between align-items-center mb-3">
-        <h5 class="card-title">User Management</h5>
-        <a href="{{ route('user_management.create') }}" class="btn btn-primary">Tambah Data</a>
+        <h5 class="card-title">Jabatan</h5>
+        <a href="{{ route('jabatan.create') }}" class="btn btn-primary">Tambah Data</a>
     </div>
     <div class="content-wrapper">
         <div class="row same-height">
@@ -15,31 +15,23 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Avatar</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Jabatan</th>
+                                    <th>Kode Jabatan</th>
+                                    <th>Nama Jabatan</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users as $key => $user)
+                                @foreach ($jabatan as $key => $jabatan)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
-                                    <td><img src="{{ asset('assets/images/avatar/' . $user->avatar) }}" alt="Avatar" style="width: 50px; height: 50px;"></td>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->email }}</td>
-                                    <td>{{ $user->jabatan }}</td>
+                                    <td>{{ $jabatan->kd_jabatan }}</td>
+                                    <td>{{ $jabatan->nm_jabatan }}</td>
                                     <td>
-                                        <a href="" class="btn btn-info btn-sm">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
-
-                                        <a href="{{ route('user_management.edit', $user->id) }}" class="btn btn-warning btn-sm">
+                                        <a href="{{ route('jabatan.edit', $jabatan->id) }}" class="btn btn-warning btn-sm">
                                             <i class="fas fa-pen"></i>
                                         </a>
 
-                                        <form action="{{ route('user_management.destroy', $user->id) }}" method="POST" style="display: inline-block;">
+                                        <form action="{{ route('jabatan.destroy', $jabatan->id) }}" method="POST" style="display: inline-block;">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this user?')">

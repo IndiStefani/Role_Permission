@@ -13,13 +13,16 @@ return new class extends Migration
     {
         Schema::create('tb_surat_keluar', function (Blueprint $table) {
             $table->id();
-            $table->string('perihal')->nullable();
-            $table->string('no_agenda')->nullable();
-            $table->string('no_surat')->nullable();
             $table->string('tgl_surat')->nullable();
-            $table->unsignedBigInteger('id_tujuan')->nullable();
-            $table->unsignedBigInteger('id_instansi')->nullable();
-            $table->unsignedBigInteger('id_index')->nullable();
+            $table->string('no_surat')->nullable();
+            $table->string('sifat')->nullable();
+            $table->string('pengirim')->nullable();
+            $table->string('perihal')->nullable();
+            $table->string('tujuan')->nullable();
+            $table->string('alamat')->nullable();
+            $table->string('isi_surat')->nullable();
+            $table->string('file')->nullable();
+            $table->string('disposisi')->nullable();
             $table->timestamps();
         });
     }

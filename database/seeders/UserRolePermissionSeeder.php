@@ -18,29 +18,24 @@ class UserRolePermissionSeeder extends Seeder
     public function run(): void
     {
         DB::beginTransaction();
-        try {
-            $super = User::create([
-                'email' => 'super@gmail.com',
-                'name' => 'super',
-                'password' => bcrypt('12345678')
-            ]);
-    
+        try {    
             $admin = User::create([
+                'avatar' => 'default.png',
                 'email' => 'admin@gmail.com',
                 'name' => 'admin',
                 'password' => bcrypt('12345678')
             ]);
     
-            $pegawai = User::create([
-                'email' => 'pegawai@gmail.com',
-                'name' => 'pegawai',
+            $user = User::create([
+                'avatar' => 'default.png',
+                'email' => 'user@gmail.com',
+                'name' => 'user',
                 'password' => bcrypt('12345678')
             ]);
     
     
-            $role_super = Role::create(['name' => 'super']);
             $role_admin = Role::create(['name' => 'admin']);
-            $role_pegawai = Role::create(['name' => 'pegawai']);
+            $role_user = Role::create(['name' => 'user']);
     
     
             $permission = Permission::create(['name' => 'read role']);
@@ -48,14 +43,13 @@ class UserRolePermissionSeeder extends Seeder
             $permission = Permission::create(['name' => 'delete role']);
             $permission = Permission::create(['name' => 'update role']);
     
-            $role_super->givePermissionTo(['read role']);
-            $role_super->givePermissionTo(['create role']);
-            $role_super->givePermissionTo(['delete role']);
-            $role_super->givePermissionTo(['update role']);
+            $role_admin->givePermissionTo(['read role']);
+            $role_admin->givePermissionTo(['create role']);
+            $role_admin->givePermissionTo(['delete role']);
+            $role_admin->givePermissionTo(['update role']);
 
-            $super->assignRole('super');
             $admin->assignRole('admin');
-            $pegawai->assignRole('pegawai');
+            $user->assignRole('user');
 
             DB::commit();
         } catch (\Throwable $th) {

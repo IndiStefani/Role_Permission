@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('tb_surat_masuk', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('perihal')->nullable();
-            $table->string('no_agenda')->nullable();
-            $table->string('no_surat')->nullable();
             $table->string('tgl_surat')->nullable();
-            $table->unsignedBigInteger('id_instansi')->nullable();
-            $table->unsignedBigInteger('id_index')->nullable();
+            $table->string('no_surat')->nullable();
+            $table->string('sifat')->nullable();
+            $table->string('pengirim')->nullable();
+            $table->string('perihal')->nullable();
+            $table->string('isi_surat')->nullable();
             $table->string('file')->nullable();
             $table->string('disposisi')->nullable();
             $table->timestamps();

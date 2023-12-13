@@ -100,7 +100,7 @@
                                 </div>
                                 <div class="col">
                                     <button type="submit" class="btn btn-primary">
-                                        {{ __('Register') }}
+                                        {{ __('Submit') }}
                                     </button>
                                 </div>
                             </div>

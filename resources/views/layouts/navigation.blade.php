@@ -13,27 +13,28 @@
             </a>
         </li>
         <li>
-            <a href="#" class="link" data-route="jabatan">
+            <a href="{{ route('jabatan.index') }}" class="link" data-route="jabatan">
                 <i class="fas fa-briefcase"></i>
                 <span>Jabatan</span>
             </a>
         </li>
         <li>
-            <a href="#" class="link" data-route="instansi">
-            <i class="fas fa-building"></i>
-                <span>Instansi</span>
-            </a>
-        </li>
-        <li>
-            <a href="#" class="link" data-route="surat_masuk">
+            <a href="{{ route('surat_masuk.index') }}" class="link" data-route="surat_masuk">
                 <i class="fas fa-envelope"></i>
                 <span>Surat Masuk</span>
             </a>
         </li>
         <li>
-            <a href="#" class="link" data-route="surat_keluar">
+            <a href="" class="link" data-route="surat_keluar">
                 <i class="fas fa-envelope-open"></i>
                 <span>Surat Keluar</span>
+            </a>
+        </li>
+        
+        <li>
+            <a href="#" class="link" data-route="instansi">
+            <i class="fas fa-print"></i>
+                <span>Report</span>
             </a>
         </li>
     </ul>
