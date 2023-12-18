@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SkeluarController;
 use App\Http\Controllers\SmasukController;
 use App\Http\Controllers\UserController;
 
@@ -64,5 +65,16 @@ Route::prefix('/Surat-Masuk')->middleware(['auth'])->group(function () {
     Route::get('/edit/{Smasuk}', [SmasukController::class, 'edit'])->name('surat_masuk.edit');
     Route::put('/update/{Smasuk}', [SmasukController::class, 'update'])->name('surat_masuk.update');
     Route::delete('/{Smasuk}', [SmasukController::class, 'destroy'])->name('surat_masuk.destroy');
+    Route::post('/store/disposisi', [DisposisiController::class, 'store'])->name('disposisi.store');
+});
+
+Route::prefix('/Surat-Keluar')->middleware(['auth'])->group(function () {
+    Route::get('/', [SkeluarController::class, 'index'])->name('surat_keluar.index');
+    Route::get('/view/{id}', [SkeluarController::class, 'view'])->name('surat_keluar.view');
+    Route::get('/create', [SkeluarController::class, 'create'])->name('surat_keluar.create');
+    Route::post('/store', [SkeluarController::class, 'store'])->name('surat_keluar.store');
+    Route::get('/edit/{Smasuk}', [SkeluarController::class, 'edit'])->name('surat_keluar.edit');
+    Route::put('/update/{Smasuk}', [SkeluarController::class, 'update'])->name('surat_keluar.update');
+    Route::delete('/{Smasuk}', [SkeluarController::class, 'destroy'])->name('surat_keluar.destroy');
     Route::post('/store/disposisi', [DisposisiController::class, 'store'])->name('disposisi.store');
 });

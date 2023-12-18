@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('tb_surat_keluar', function (Blueprint $table) {
             $table->id();
-            $table->string('tgl_surat')->nullable();
+            $table->date('tgl_surat')->nullable();
             $table->string('no_surat')->nullable();
             $table->string('sifat')->nullable();
             $table->string('pengirim')->nullable();
@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('alamat')->nullable();
             $table->string('isi_surat')->nullable();
             $table->string('file')->nullable();
-            $table->string('disposisi')->nullable();
             $table->timestamps();
         });
     }

@@ -32,7 +32,7 @@
             </a>
         </li>
         <li>
-            <a href="" class="link" data-route="surat_keluar">
+            <a href="{{ route('surat_keluar.index') }}" class="link" data-route="surat_keluar">
                 <i class="fas fa-envelope-open"></i>
                 <span>Surat Keluar</span>
             </a>

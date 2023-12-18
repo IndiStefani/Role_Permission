@@ -64,7 +64,6 @@ class SmasukController extends Controller
                 'perihal' => $request->input('perihal'),
                 'isi_surat' => $request->input('isi_surat'),
                 'file' => $fileName,
-                'disposisi' => 'kepala',
             ]);
 
             $Smasuk->save();
