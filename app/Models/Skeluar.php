@@ -10,7 +10,7 @@ class Skeluar extends Model
     use HasFactory;
 
     protected $table = 'tb_surat_keluar';
-
+    protected $primaryKey = "id";
     protected $fillable = [
         'tgl_surat',
         'no_surat',

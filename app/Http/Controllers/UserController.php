@@ -11,6 +11,7 @@ class UserController extends Controller
 {
     public function index()
     {
+        $this->authorize('read role');
         $users = User::all();
 
         return view('user_management.index', compact('users'));

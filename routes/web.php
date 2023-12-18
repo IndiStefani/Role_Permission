@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DisposisiController;
 use App\Http\Controllers\JabatanController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -27,7 +28,7 @@ Route::get('logout', function () {
 })->name('logout');
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('/dashboard', function() {
@@ -68,4 +69,5 @@ Route::prefix('/Surat-Masuk')->middleware(['auth'])->group(function () {
     Route::get('/edit/{Smasuk}', [SmasukController::class, 'edit'])->name('surat_masuk.edit');
     Route::put('/update/{Smasuk}', [SmasukController::class, 'update'])->name('surat_masuk.update');
     Route::delete('/{Smasuk}', [SmasukController::class, 'destroy'])->name('surat_masuk.destroy');
+    Route::post('/store/disposisi', [DisposisiController::class, 'store'])->name('disposisi.store');
 });

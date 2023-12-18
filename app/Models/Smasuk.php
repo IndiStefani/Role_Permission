@@ -10,7 +10,7 @@ class Smasuk extends Model
     use HasFactory;
 
     protected $table = 'tb_surat_masuk';
-
+    protected $primaryKey = "id";
     protected $fillable = [
         'tgl_surat',
         'no_surat',
@@ -19,6 +19,10 @@ class Smasuk extends Model
         'perihal',
         'isi_surat',
         'file',
-        'disposisi',
     ];
+
+    public function disposisi()
+    {
+        return $this->hasOne(Disposisi::class, 'id_surat_masuk');
+    }
 }

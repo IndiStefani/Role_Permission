@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard &mdash; Arfa</title>
+    <title>SISFO &mdash; Persuratan</title>
+    <link rel="shortcut icon" href="{{ asset('assets/images/images.jpg') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
 
     <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
@@ -31,13 +32,21 @@
 <body>
     <div id="app">
         <div class="shadow-header"></div>
-        @include('layouts.header')
-        @include('layouts.nav')
 
-        @yield('content')
+        @if(Auth::check())
+            @include('layouts.header')
+            @include('layouts.nav')
 
-        @include('layouts.footer')
+            @yield('content')
+
+            @include('layouts.footer')
+        @endif
+
     </div>
+    
+    @guest
+        @yield('content')
+    @endguest
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.js') }}"></script>
     <script src="{{ asset('vendor/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
@@ -48,6 +57,7 @@
     @stack('js')
     <!-- ======= -->
     <script src="{{ asset('assets/js/main.min.js') }}"></script>
+    <script src="{{ asset('assets/js/login.js') }}"></script>
 
     <script>
         // table

@@ -26,30 +26,35 @@ class UserRolePermissionSeeder extends Seeder
                 'password' => bcrypt('12345678')
             ]);
     
-            $user = User::create([
+            $pegawai = User::create([
                 'avatar' => 'default.png',
-                'email' => 'user@gmail.com',
-                'name' => 'user',
+                'email' => 'pegawai@gmail.com',
+                'name' => 'pegawai',
                 'password' => bcrypt('12345678')
             ]);
     
     
             $role_admin = Role::create(['name' => 'admin']);
-            $role_user = Role::create(['name' => 'user']);
+            $role_pegawai = Role::create(['name' => 'pegawai']);
     
     
             $permission = Permission::create(['name' => 'read role']);
+            $permission = Permission::create(['name' => 'read jabatan']);
+            $permission = Permission::create(['name' => 'read report']);
             $permission = Permission::create(['name' => 'create role']);
             $permission = Permission::create(['name' => 'delete role']);
             $permission = Permission::create(['name' => 'update role']);
+
     
             $role_admin->givePermissionTo(['read role']);
+            $role_admin->givePermissionTo(['read jabatan']);
+            $role_admin->givePermissionTo(['read report']);
             $role_admin->givePermissionTo(['create role']);
             $role_admin->givePermissionTo(['delete role']);
             $role_admin->givePermissionTo(['update role']);
 
             $admin->assignRole('admin');
-            $user->assignRole('user');
+            $pegawai->assignRole('pegawai');
 
             DB::commit();
         } catch (\Throwable $th) {

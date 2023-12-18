@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Disposisi;
+use App\Models\Jabatan;
 use Illuminate\Http\Request;
 use App\Models\Smasuk;
 
@@ -10,15 +12,19 @@ class SmasukController extends Controller
     public function index()
     {
         $Smasuk = Smasuk::all();
+        $disposisi = Disposisi::all();
+        $jabatan = Jabatan::all();
+        // dd($Smasuk);
 
-        return view('surat_masuk.index', compact('Smasuk'));
+        return view('surat_masuk.index', compact('Smasuk', 'disposisi', 'jabatan'));
     }
 
     public function view($id)
     {
         $Smasuk = Smasuk::find($id);
+        $disposisi = $Smasuk->disposisi;
 
-        return view('surat_masuk.view', compact('Smasuk'));
+        return view('surat_masuk.view', compact('Smasuk', 'disposisi'));
     }
 
 
@@ -46,7 +52,7 @@ class SmasukController extends Controller
         if ($request->hasFile('file')) {
             $file = $request->file('file');
             $fileName = time() . '_' . $file->getClientOriginalName();
-            $file->storeAs('assets/file/', $fileName);
+            $file->move(public_path('assets/file/'), $fileName);
 
             // Create a new Smasuk instance
             $Smasuk = new Smasuk([

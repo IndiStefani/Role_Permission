@@ -11,6 +11,7 @@ class JabatanController extends Controller
 {
     public function index()
     {
+        $this->authorize('read role');
         $jabatan = Jabatan::all();
         return view('jabatan.index', compact('jabatan'));
     }
