@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Disposisi;
 use App\Models\Jabatan;
-use Illuminate\Http\Request;
 use App\Models\Smasuk;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class SmasukController extends Controller
 {
@@ -77,56 +78,79 @@ class SmasukController extends Controller
     }
 
 
-    // public function edit(User $user)
-    // {
-    //     $roles = Role::all();
+    public function edit($id)
+    {
+        $Smasuk = Smasuk::find($id);
 
-    //     return view('user_management.edit', compact('user', 'roles'));
-    // }
+        return view('surat_masuk.edit', compact('Smasuk'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'tgl_surat' => 'required',
+            'no_surat' => 'required',
+            'sifat' => 'required',
+            'pengirim' => 'required',
+            'perihal' => 'required',
+            'isi_surat' => 'required',
+            'file' => 'file|mimes:png,jpg,jpeg,pdf,doc,xls',
+        ]);
+
+        $Smasuk = Smasuk::find($id);
+
+        if ($Smasuk) {
+            // Handle file upload if a file is provided
+            if ($request->hasFile('file')) {
+                // Your file upload code here
+                $file = $request->file('file');
+                $fileName = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('assets/file/'), $fileName);
+
+                // Delete the old file if it exists
+                if ($Smasuk->file) {
+                    $oldFilePath = public_path('assets/file/' . $Smasuk->file);
+                    if (file_exists($oldFilePath)) {
+                        unlink($oldFilePath);
+                    }
+                }
+
+                // Update the file property in the Smasuk model
+                $Smasuk->file = $fileName;
+            }
+
+            // Update other fields
+            $Smasuk->tgl_surat = $request->input('tgl_surat');
+            $Smasuk->no_surat = $request->input('no_surat');
+            $Smasuk->sifat = $request->input('sifat');
+            $Smasuk->pengirim = $request->input('pengirim');
+            $Smasuk->perihal = $request->input('perihal');
+            $Smasuk->isi_surat = $request->input('isi_surat');
+
+            $Smasuk->save();
+
+            return redirect()->route('surat_masuk.index')->with('success', 'Surat Masuk updated successfully');
+        } else {
+            return redirect()->back()->with('error', 'Smasuk not found');
+        }
+    }
 
 
-    // public function update(Request $request, User $user)
-    // {
-    //     // Validasi input, sesuaikan sesuai kebutuhan
-    //     $request->validate([
-    //         'name' => 'required',
-    //         'email' => 'required|email|unique:users,email,' . $user->id,
-    //         'avatar' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-    //     ]);
+    public function destroy(Smasuk $Smasuk)
+    {
+        // Hapus file jika ada
+        if ($Smasuk->file) {
+            $filePath = public_path('assets/file/' . $Smasuk->file);
 
-    //     // Menyimpan informasi pengguna
-    //     $user->name = $request->input('name');
-    //     $user->email = $request->input('email');
+            // Check if the file exists before attempting to delete it
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
+        }
 
-    //     // Menyimpan foto profil jika diunggah
-    //     if ($request->hasFile('avatar')) {
-    //         $image = $request->file('avatar');
-    //         $fileName = time() . '.' . $image->getClientOriginalExtension();
-    //         $image->move(public_path('assets/images/avatar/'), $fileName);
-    //         $user->avatar = $fileName;
-    //     }
+        // Hapus Smasuk dari database
+        $Smasuk->delete();
 
-    //     $user->save();
-
-    //     return redirect()->route('admin.user.index')->with('success', 'Profil berhasil diperbarui');
-    // }
-
-    // public function destroy(User $user)
-    // {
-    //     // Check if the user has a profile image and it is not the default image
-    //     if ($user->avatar && $user->avatar !== 'default.png') {
-    //         $imagePath = public_path('assets/images/avatar/' . $user->avatar);
-
-    //         // Check if the file exists before attempting to delete it
-    //         if (file_exists($imagePath)) {
-    //             unlink($imagePath);
-    //         }
-    //     }
-
-    //     // Delete the obat record from the database
-    //     $user->delete();
-
-    //     return redirect()->route('user_management.index')
-    //         ->with('success', 'User deleted successfully');
-    // }
+        return redirect()->route('surat_masuk.index')->with('success', 'Surat Masuk deleted successfully');
+    }
 }

@@ -38,10 +38,8 @@
                                     <div class="row">
                                         <div class="col-md-4 profile-left" align="center">
                                             <div class="panel-body">
-                                                <a href="{{ asset('assets/file/' . $Smasuk->file) }}" target=""
-                                                    title="view" class="btn btn-lg btn-white">
-                                                    <img src="{{ asset('assets/images/file.png') }}" alt="file"
-                                                        style="width: 50px;">
+                                                <a href="{{ asset('assets/file/' . $Smasuk->file) }}" target="" title="view" class="btn btn-lg btn-white">
+                                                    <img src="{{ asset('assets/images/file.png') }}" alt="file" style="width: 50px;">
                                                 </a>
                                             </div>
                                             <div class="m-b-10">

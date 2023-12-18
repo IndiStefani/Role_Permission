@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DisposisiController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JabatanController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -31,16 +32,10 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/dashboard', function() {
-return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
 Auth::routes();
 
-Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
-
-Route::middleware(['auth'])->group(function () {
-    Route::resource('roles', RoleController::class);
+Route::prefix('/Dashboard')->middleware('auth')->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('dashboard');
 });
 
 Route::prefix('/User-Management')->middleware(['auth'])->group(function () {

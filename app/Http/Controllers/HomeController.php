@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Disposisi;
+use App\Models\Skeluar;
+use App\Models\Smasuk;
+use App\Models\User;
+use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +28,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        $userCount = User::count();
+        $disposisiCount = Disposisi::count();
+        $suratMasukCount = Smasuk::count();
+        $suratKeluarCount = Skeluar::count();
+
+        return View::make('dashboard', compact('userCount', 'disposisiCount', 'suratMasukCount', 'suratKeluarCount'));
     }
 }
