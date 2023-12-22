@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jabatan;
 use App\Models\Skeluar;
 use Illuminate\Http\Request;
 
@@ -21,7 +22,9 @@ class SkeluarController extends Controller
 
     public function create()
     {
-        return view('surat_keluar.create');
+        $jabatan = Jabatan::all();
+
+        return view('surat_keluar.create', compact('jabatan'));
     }
 
     public function store(Request $request)
@@ -31,15 +34,14 @@ class SkeluarController extends Controller
             'tgl_surat' => 'required',
             'no_surat' => 'required',
             'sifat' => 'required',
-            'pengirim' => 'required',
+            'id_pengirim' => 'required',
             'perihal' => 'required',
             'tujuan' => 'required',
             'alamat' => 'required',
             'isi_surat' => 'required',
             'file' => 'file|mimes:png,jpg,jpeg,pdf,doc,xls',
-            'disposisi' => 'required',
         ]);
-
+        
         if ($request->hasFile('file')) {
             $file = $request->file('file');
             $fileName = time() . '_' . $file->getClientOriginalName();
@@ -50,8 +52,10 @@ class SkeluarController extends Controller
                 'tgl_surat' => $request->input('tgl_surat'),
                 'no_surat' => $request->input('no_surat'),
                 'sifat' => $request->input('sifat'),
-                'pengirim' => $request->input('pengirim'),
+                'id_pengirim' => $request->input('id_pengirim'),
                 'perihal' => $request->input('perihal'),
+                'tujuan' => $request->input('tujuan'),
+                'alamat' => $request->input('alamat'),
                 'isi_surat' => $request->input('isi_surat'),
                 'file' => $fileName,
             ]);

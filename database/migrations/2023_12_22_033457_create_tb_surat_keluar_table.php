@@ -16,13 +16,15 @@ return new class extends Migration
             $table->date('tgl_surat')->nullable();
             $table->string('no_surat')->nullable();
             $table->string('sifat')->nullable();
-            $table->string('pengirim')->nullable();
-            $table->string('perihal')->nullable();
+            $table->unsignedBigInteger('id_pengirim')->unsigned()->nullable();
             $table->string('tujuan')->nullable();
+            $table->string('perihal')->nullable();
             $table->string('alamat')->nullable();
             $table->string('isi_surat')->nullable();
             $table->string('file')->nullable();
             $table->timestamps();
+
+            $table->foreign('id_pengirim')->references('id')->on('tb_jabatan')->onDelete('cascade');
         });
     }
 
@@ -31,6 +33,11 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('tb_surat_keluar', function (Blueprint $table) {
+            // Menghapus foreign key jika perlu
+            $table->dropForeign(['id_pengirim']);
+        });
+        
         Schema::dropIfExists('tb_surat_keluar');
     }
 };

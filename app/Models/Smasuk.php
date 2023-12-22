@@ -15,7 +15,7 @@ class Smasuk extends Model
         'tgl_surat',
         'no_surat',
         'sifat',
-        'pengirim',
+        'id_pengirim',
         'perihal',
         'isi_surat',
         'file',
@@ -24,5 +24,10 @@ class Smasuk extends Model
     public function disposisi()
     {
         return $this->hasOne(Disposisi::class, 'id_surat_masuk');
+    }
+
+    public function pengirim()
+    {
+        return $this->belongsTo(Jabatan::class, 'id_pengirim');
     }
 }

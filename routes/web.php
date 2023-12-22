@@ -30,7 +30,7 @@ Route::get('logout', function () {
 })->name('logout');
 
 Route::get('/', function () {
-    return view('auth.login');
+    return redirect()->route('dashboard');
 });
 
 Auth::routes();

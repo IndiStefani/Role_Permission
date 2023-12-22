@@ -3,7 +3,7 @@
 
 <div class="main-content">
     <div class="title">
-        Tambah Surat Masuk
+        Tambah Surat Keluar
     </div>
     <div class="content-wrapper">
         <div class="card">
@@ -11,7 +11,7 @@
                 <h4>Form Tambah</h4>
             </div>
             <div class="card-body">
-                <form method="POST" action="{{ route('surat_masuk.store') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('surat_keluar.store') }}" enctype="multipart/form-data">
                     @csrf
 
                     <div class="row  d-flex justify-content-center align-items-center">
@@ -46,14 +46,31 @@
                         </div>
                         <div class="col-md-7">
                             <div class="mb-3">
-                                <label for="pengirim" class="form-label">Pengirim</label>
-                                <input type="text" class="form-control" id="pengirim" name="pengirim">
+                                <label for="id_pegirim" class="form-label">Pengirim</label>
+                                <select class="form-select form-select" aria-label="pengirim" id="id_pengirim" name="id_pengirim">
+                                    <option selected>. . .</option>
+                                    @foreach($jabatan as $jabatan)
+                                        <option value="{{ $jabatan->id }}">{{ $jabatan->nm_jabatan }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="mb-3">
+                                <label for="tujuan" class="form-label">Tujuan</label>
+                                <input type="text" class="form-control" id="tujuan" name="tujuan">
                             </div>
                         </div>
                         <div class="col-md-7">
                             <div class="mb-3">
                                 <label for="perihal" class="form-label">Perihal</label>
                                 <input type="text" class="form-control" id="perihal" name="perihal">
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="mb-3">
+                                <label for="alamat" class="form-label">Alamat</label>
+                                <input type="text" class="form-control" id="alamat" name="alamat">
                             </div>
                         </div>
                         <div class="col-md-7">
@@ -72,7 +89,7 @@
                         <div class="d-flex justify-content-center align-items-center">
                             <div class="row mb-0 mt-5">
                                 <div class="col">
-                                    <a href="{{ route('surat_masuk.index') }}" class="btn btn-danger">Kembali</a>
+                                    <a href="{{ route('surat_keluar.index') }}" class="btn btn-danger">Kembali</a>
                                 </div>
                                 <div class="col">
                                     <button type="submit" class="btn btn-primary">

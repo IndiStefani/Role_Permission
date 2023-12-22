@@ -15,4 +15,14 @@ class Jabatan extends Model
         'kd_jabatan',
         'nm_jabatan',
     ];
+
+    public function smasuk()
+    {
+        return $this->hasMany(Jabatan::class, 'id_pengirim');
+    }
+
+    public function skeluar()
+    {
+        return $this->hasMany(Jabatan::class, 'id_pengirim');
+    }
 }

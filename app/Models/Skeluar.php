@@ -15,7 +15,7 @@ class Skeluar extends Model
         'tgl_surat',
         'no_surat',
         'sifat',
-        'pengirim',
+        'id_pengirim',
         'perihal',
         'tujuan',
         'alamat',
@@ -23,4 +23,9 @@ class Skeluar extends Model
         'file',
         'disposisi',
     ];
+
+    public function pengirim()
+    {
+        return $this->belongsTo(Jabatan::class, 'id_pengirim');
+    }
 }

@@ -3,7 +3,7 @@
     <div class="main-content">
         <div class="card-body d-flex justify-content-between align-items-center mb-3">
             <h5 class="card-title">Surat Keluar</h5>
-            @if(auth()->user()->hasRole('admin'))
+            @if (auth()->user()->hasRole('admin'))
                 <a href="{{ route('surat_keluar.create') }}" class="btn btn-primary">Tambah Data</a>
             @endif
         </div>
@@ -20,7 +20,8 @@
                                         <th>Nomor Surat</th>
                                         <th>Sifat Surat</th>
                                         <th>Pengirim</th>
-                                        <th>Disposisi Saat Ini</th>
+                                        <th>Kepada</th>
+                                        <th>Disposisi</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -35,19 +36,8 @@
                                                 </a>
                                             </td>
                                             <td>{{ $Skeluar->sifat }}</td>
-                                            <td>{{ $Skeluar->pengirim }}</td>
+                                            <td>{{ $Skeluar->pengirim->nm_jabatan }}</td>
                                             <td>
-                                                @if (!optional($Skeluar->disposisi)->tujuan)
-                                                    <a href="#" class="btn btn-success btn-sm btn-location-arrow"
-                                                        data-bs-toggle="modal" data-bs-target="#largeModal"
-                                                        data-id-surat="{{ $Skeluar->id }}">
-                                                        <i class="fas fa-location-arrow"></i>
-                                                    </a>
-                                                @else
-                                                    <button class="btn btn-secondary btn-sm" disabled>
-                                                        <i class="fas fa-location-arrow"></i>
-                                                    </button>
-                                                @endif
                                                 {{ optional($Skeluar->disposisi)->tujuan }}
                                             </td>
 
