@@ -53,7 +53,7 @@
                 </div>
             </div>
             <div class="text-center mt-5 text-muted">
-                Copyright &copy; 2022 &mdash; SISFO Persuratan
+                Copyright &copy; 2023 &mdash; SISFO Persuratan
             </div>
         </div>
     </div>

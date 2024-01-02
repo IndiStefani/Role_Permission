@@ -11,16 +11,18 @@
                         <div>{{ auth()->user()->name }}</div>
                     </div>
                     @if (auth()->user()->avatar)
-                    <img class="img-user" src="{{ asset('assets/images/avatar/' . auth()->user()->avatar) }}" alt="user" srcset="">
+                        <img class="img-user" src="{{ asset('assets/images/avatar/' . auth()->user()->avatar) }}"
+                            alt="user" srcset="">
                     @endif
                 </a>
                 <ul class="dropdown-menu small">
                     <li class="menu-content ps-menu">
-                        <a href="#">
+                        <a href="{{ route('user_management.profile') }}">
                             <div class="description">
                                 <i class="ti-user"></i> Profile
                             </div>
                         </a>
+
                         <a href="#">
                             <div class="description">
                                 <i class="ti-settings"></i> Setting

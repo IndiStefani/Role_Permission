@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jabatan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use App\Models\User;
 use App\Models\Role;
+
 
 class UserController extends Controller
 {
@@ -17,11 +19,19 @@ class UserController extends Controller
         return view('user_management.index', compact('users'));
     }
 
+    public function profile()
+    {
+        $users = User::all();
+
+        return view('user_management.profile', compact('users'));
+    }
+
     public function create()
     {
         $roles = Role::all();
+        $jabatan = Jabatan::all();
 
-        return view('user_management.create', compact('roles'));
+        return view('user_management.create', compact('roles', 'jabatan'));
     }
 
     public function store(Request $request)
@@ -32,6 +42,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:8',
+            'id_jabatan' => 'required',
         ]);
 
         if ($request->hasFile('avatar')) {
@@ -49,6 +60,7 @@ class UserController extends Controller
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
+            'id_jabatan' => $request->input('id_jabatan'),
         ]);
 
         // Simpan user ke database
@@ -62,8 +74,9 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $roles = Role::all();
+        $jabatan = Jabatan::all();
 
-        return view('user_management.edit', compact('user', 'roles'));
+        return view('user_management.edit', compact('user', 'roles', 'jabatan'));
     }
 
 
@@ -74,11 +87,13 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $user->id,
             'avatar' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'id_jabatan' => 'required',
         ]);
 
         // Menyimpan informasi pengguna
         $user->name = $request->input('name');
         $user->email = $request->input('email');
+        $user->id_jabatan = $request->input('id_jabatan');
 
         // Menyimpan foto profil jika diunggah
         if ($request->hasFile('avatar')) {

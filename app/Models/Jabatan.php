@@ -16,13 +16,13 @@ class Jabatan extends Model
         'nm_jabatan',
     ];
 
-    public function smasuk()
+    public function skeluar()
     {
         return $this->hasMany(Jabatan::class, 'id_pengirim');
     }
 
-    public function skeluar()
+    public function user()
     {
-        return $this->hasMany(Jabatan::class, 'id_pengirim');
+        return $this->hasMany(Jabatan::class, 'id_jabatan');
     }
 }

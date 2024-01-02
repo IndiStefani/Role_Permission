@@ -41,6 +41,7 @@ Route::prefix('/Dashboard')->middleware('auth')->group(function () {
 
 Route::prefix('/User-Management')->middleware(['auth'])->group(function () {
     Route::get('/', [UserController::class, 'index'])->name('user_management.index');
+    Route::get('/Profile', [UserController::class, 'profile'])->name('user_management.profile');
     Route::get('/create', [UserController::class, 'create'])->name('user_management.create');
     Route::post('/store', [UserController::class, 'store'])->name('user_management.store');
     Route::get('/edit/{user}', [UserController::class, 'edit'])->name('user_management.edit');
@@ -59,6 +60,7 @@ Route::prefix('/Jabatan')->middleware(['auth'])->group(function () {
 
 Route::prefix('/Surat-Masuk')->middleware(['auth'])->group(function () {
     Route::get('/', [SmasukController::class, 'index'])->name('surat_masuk.index');
+    Route::get('/Pegawai', [SmasukController::class, 'index_pegawai'])->name('surat_masuk.index_pegawai');
     Route::get('/view/{id}', [SmasukController::class, 'view'])->name('surat_masuk.view');
     Route::get('/create', [SmasukController::class, 'create'])->name('surat_masuk.create');
     Route::post('/store', [SmasukController::class, 'store'])->name('surat_masuk.store');
@@ -77,4 +79,5 @@ Route::prefix('/Surat-Keluar')->middleware(['auth'])->group(function () {
     Route::put('/update/{Smasuk}', [SkeluarController::class, 'update'])->name('surat_keluar.update');
     Route::delete('/{Smasuk}', [SkeluarController::class, 'destroy'])->name('surat_keluar.destroy');
     Route::post('/store/disposisi', [DisposisiController::class, 'store'])->name('disposisi.store');
+    Route::post('/store/disposisi_keluar', [DisposisiController::class, 'store_Skeluar'])->name('disposisi_keluar.store');
 });

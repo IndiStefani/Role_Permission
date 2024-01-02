@@ -29,7 +29,7 @@
                                     <td><img src="{{ asset('assets/images/avatar/' . $user->avatar) }}" alt="Avatar" style="width: 50px; height: 50px;"></td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
-                                    <td>{{ $user->jabatan }}</td>
+                                    <td>{{ optional($user->jabatan)->nm_jabatan }}</td>
                                     <td>
                                         <a href="" class="btn btn-info btn-sm">
                                             <i class="fas fa-eye"></i>

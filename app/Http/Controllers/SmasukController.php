@@ -6,18 +6,32 @@ use App\Models\Disposisi;
 use App\Models\Jabatan;
 use App\Models\Smasuk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
 class SmasukController extends Controller
 {
     public function index()
     {
-        $Smasuk = Smasuk::all();
-        $disposisi = Disposisi::all();
+        $Smasuk = Smasuk::with('disposisi')->get();
         $jabatan = Jabatan::all();
-        // dd($Smasuk);
 
-        return view('surat_masuk.index', compact('Smasuk', 'disposisi', 'jabatan'));
+        return view('surat_masuk.index', compact('Smasuk', 'jabatan'));
+    }
+
+    public function index_pegawai()
+    {
+        $jabatan = Jabatan::all();
+        $userRole = auth()->user()->jabatan->first()->nm_jabatan;
+
+        $Smasuk = Disposisi::with('Smasuk')
+            ->whereHas('Smasuk', function ($query) use ($userRole) {
+                // Assuming 'role' is the column name in the 'roles' table
+                $query->where('tujuan', $userRole);
+            })
+            ->get();
+
+        return view('surat_masuk.index_pegawai', compact('Smasuk', 'jabatan'));
     }
 
     public function view($id)

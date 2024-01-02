@@ -13,6 +13,7 @@ class Disposisi extends Model
     protected $primaryKey = "id";
     protected $fillable = [
         'id_surat_masuk',
+        'id_surat_keluar',
         'isi_disposisi',
         'dari',
         'tujuan',
@@ -21,6 +22,11 @@ class Disposisi extends Model
     // Define the relationship with Smasuk
     public function smasuk()
     {
-        return $this->hasMany(Smasuk::class, 'id_surat_masuk');
+        return $this->belongsTo(Smasuk::class, 'id_surat_masuk');
+    }
+
+    public function skeluar()
+    {
+        return $this->belongsTo(Skeluar::class, 'id_surat_keluar');
     }
 }

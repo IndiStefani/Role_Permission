@@ -6,14 +6,18 @@
     <div class="main-content">
         <div class="content-wrapper">
             <div class="row same-height">
-                <div class="col">
-                    <div class="card text-white bg-primary mb-3">
-                        <div class="card-body">
-                            <p class="card-title">User</p>
-                            <h2 class="card-text"><strong>{{ $userCount }}</strong></h2>
+
+                @can('read role')
+                    <div class="col">
+                        <div class="card text-white bg-primary mb-3">
+                            <div class="card-body">
+                                <p class="card-title">User</p>
+                                <h2 class="card-text"><strong>{{ $userCount }}</strong></h2>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endcan
+                
                 <div class="col">
                     <div class="card text-white bg-success mb-3">
                         <div class="card-body">

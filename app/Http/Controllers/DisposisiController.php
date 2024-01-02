@@ -27,4 +27,22 @@ class DisposisiController extends Controller
 
         return redirect()->back()->with('success', 'Disposisi created successfully!');
     }
+
+    public function store_Skeluar(Request $request)
+    {
+        // Validate the incoming request data
+        $request->validate([
+            'id_surat_keluar' => 'required|exists:tb_surat_keluar,id',
+            'isi_disposisi' => 'required|max:128',
+            'tujuan' => 'required',
+        ]);
+
+        Disposisi::create([
+            'id_surat_keluar' => $request->input('id_surat_keluar'),
+            'isi_disposisi' => $request->input('isi_disposisi'),
+            'dari' => $request->input('dari'),
+        ]);
+
+        return redirect()->back()->with('success', 'Disposisi created successfully!');
+    }
 }
